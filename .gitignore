@@ -50,3 +50,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Mac
+.DS_Store
+.idea
+/cmake-build-debug/
