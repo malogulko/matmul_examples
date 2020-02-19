@@ -26,15 +26,15 @@ struct matrixInfo {
 void parse_args(int argc, char *argv[], int *size, int *block_size) {
     if (argc >= 3) {
         if (sscanf(argv[1], "%i", size) != 1) {
-            fprintf(stderr, "error - not an integer");
+            fprintf(stderr, "error - not an integer\n");
             exit(1);
         }
         if (sscanf(argv[2], "%i", block_size) != 1) {
-            fprintf(stderr, "error - not an integer");
+            fprintf(stderr, "error - not an integer\n");
             exit(1);
         }
     } else {
-        printf("Please use <matrix size> <block size> args");
+        printf("Please use <matrix size> <block size> args\n");
         exit(1);
     }
 }
@@ -238,6 +238,6 @@ int main(int argc, char *argv[]) {
     //print_matrix_blocked_rows(matrix_c, size, block_size);
 
     uint64_t delta_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000; // milliseconds
-    printf("%d;%d;%llu", size, block_size, delta_us);
+    printf("%d;%d;%llu\n", size, block_size, delta_us);
     return 0;
 }
