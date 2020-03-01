@@ -6,9 +6,7 @@
 //
 #include <time.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdint.h>
-#include <math.h>
 #include <pthread.h>
 #ifdef __APPLE__
     // Didn't manage to build atlas on mac, will work on linux though
@@ -16,50 +14,10 @@
 #else
     #include <cblas-atlas.h>
 #endif
-const int SQUARE = 2;
-const double NUM_MAX = 10.0;
+#include "utils.c"
+
 const double DGEMM_ALPLHA = 1.0; // No scaling for the product
 const double DGEMM_BETA = 1.0; // Values in matrix C have to be taken into account for blocking to work
-
-struct matrixInfo {
-    double *mxPtr;
-    int size;
-};
-
-// Parses args
-void parse_args(int argc, char *argv[], int *size, int *block_size) {
-    if (argc >= 3) {
-        if (sscanf(argv[1], "%i", size) != 1) {
-            fprintf(stderr, "error - not an integer");
-            exit(1);
-        }
-        if (sscanf(argv[2], "%i", block_size) != 1) {
-            fprintf(stderr, "error - not an integer");
-            exit(1);
-        }
-    } else {
-        printf("Please use <matrix size> <block size> args");
-        exit(1);
-    }
-}
-
-// Allocates matrix memory
-double *matrix_malloc(int size) {
-    return (double *) malloc((int) pow(size, SQUARE) * sizeof(double));
-}
-
-// Generates SQUARE matrix of the size x size
-void *random_matrix(void *input) {
-    double *mx;
-    int size;
-    struct matrixInfo *info = (struct matrixInfo *) input;
-    mx = info->mxPtr;
-    size = info->size;
-    for (int i = 0; i < size * size; i++) {
-        *(mx + i) = (double) rand() / RAND_MAX * (NUM_MAX * 2) - NUM_MAX;
-    }
-    return NULL;
-}
 
 // Prints row-wise blocked matrix
 void print_matrix_blocked_rows(double *matrix, int size, int block_size) {
