@@ -55,7 +55,11 @@ dkms.conf
 .DS_Store
 .idea
 
+#Jupyter
+/.ipynb_checkpoints
+
 # Cmake
+/.build/
 /cmake-build-debug/
 /CMakeFiles/
 /cmake_install.cmake
