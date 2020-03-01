@@ -12,9 +12,10 @@ if("${CMAKE_SYSTEM}" MATCHES "Linux")
     )
     link_directories(
             /usr/lib/x86_64-linux-gnu/blas
+            /usr/lib/x86_64-linux-gnu/atlas
     )
     target_link_libraries(blocked_ijk_blas /usr/lib/x86_64-linux-gnu/blas/libblas.a)
-    target_link_libraries(blocked_kij_atlas /usr/lib/x86_64-linux-gnu/blas/libblas.a)
+    target_link_libraries(blocked_kij_atlas /usr/lib/x86_64-linux-gnu/atlas/libblas.a)
 else()
     # THIS IS ONLY WORKS ON MY SYSTEM, PLEASE FIGURE OUT YOUR PATHS YOURSELF
     include_directories(

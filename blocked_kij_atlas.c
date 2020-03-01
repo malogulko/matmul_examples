@@ -10,8 +10,12 @@
 #include <stdint.h>
 #include <math.h>
 #include <pthread.h>
-#include <cblas.h>
-
+#ifdef __APPLE__
+    // Didn't manage to build atlas on mac, will work on linux though
+    #include <cblas.h>
+#else
+    #include <cblas-atlas.h>
+#endif
 const int SQUARE = 2;
 const double NUM_MAX = 10.0;
 const double DGEMM_ALPLHA = 1.0; // No scaling for the product
