@@ -19,49 +19,6 @@
 const double DGEMM_ALPLHA = 1.0; // No scaling for the product
 const double DGEMM_BETA = 1.0; // Values in matrix C have to be taken into account for blocking to work
 
-// Prints row-wise blocked matrix
-void print_matrix_blocked_rows(double *matrix, int size, int block_size) {
-    for (int i = 0; i < (size / block_size); i++) { // Block row
-        for (int bi = 0; bi < block_size; bi++) { // In-Block row
-            printf("[ ");
-            for (int j = 0; j < (size / block_size); j++) { // Block column
-                for (int bj = 0; bj < block_size; bj++) { // In-Block column
-                    printf("%f ",
-                           *(matrix + j * block_size * block_size + i * size * block_size + bi * block_size + bj));
-                }
-            }
-            printf("]\n");
-        }
-    }
-}
-
-// Prints col-wise blocked matrix
-void print_matrix_blocked_cols_in_rows(double *matrix, int size, int block_size) {
-    for (int i = 0; i < (size / block_size); i++) { // Block row
-        for (int bi = 0; bi < block_size; bi++) { // In-Block row
-            printf("[ ");
-            for (int j = 0; j < (size / block_size); j++) { // Block column
-                for (int bj = 0; bj < block_size; bj++) { // In-Block column
-                    printf("%f ",
-                           *(matrix + bj * block_size + i * size * block_size + bi  + j * block_size * block_size));
-                }
-            }
-            printf("]\n");
-        }
-    }
-}
-
-void ijk2(double *block_a_row, double *block_b_col, double *block_c_row, int block_size) {
-    for (int i = 0; i < block_size; i++) {
-        for (int j = 0; j < block_size; j++) {
-            double *c_sum = block_c_row + i * block_size + j;
-            for (int k = 0; k < block_size; k++) {
-                *(c_sum) += *(block_a_row + i * block_size + k) * *(block_b_col + j * block_size + k);
-            }
-        }
-    }
-}
-
 void cblas_block(double *block_a_row, double *block_b_col, double *block_c_row, int block_size) {
     cblas_dgemm(
             CblasRowMajor, // This has to be ROW due to pointer math in pointer_offset()
@@ -198,7 +155,7 @@ int main(int argc, char *argv[]) {
     // printf("\nMatrix C:\n");
     // print_matrix_blocked_rows(matrix_c, size, block_size);
 
-    uint64_t delta_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000; // milliseconds
+    uint64_t delta_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000; // microseconds
     printf("%d;%d;%llu\n", size, block_size, delta_us);
     return 0;
 }
