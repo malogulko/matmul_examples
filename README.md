@@ -1,8 +1,8 @@
 # What?
 
-This code implement blocked(tiled) IJK matrix multiplication algorithm backed by cblas calls for an actual matrix multiplication.
+This code implements blocked(tiled) IJK matrix multiplication algorithm backed by cblas calls for an actual matrix multiplication.
 
-The general idea of this particular implementation is to arrange the memory into stripes in the way that the block is always represented as a consecutive memory blocks.
+The general idea of this particular implementation is to arrange the memory into stripes in the way that the block is always represented as a consecutive memory chunks.
 
 # How to use
 
