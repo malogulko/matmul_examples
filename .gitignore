@@ -58,6 +58,23 @@ dkms.conf
 #Jupyter
 /.ipynb_checkpoints
 
+#Publisher
+Blocked IJK bias performance analyses.aux
+Blocked IJK bias performance analyses.fdb_latexmk
+Blocked IJK bias performance analyses.fls
+Blocked IJK bias performance analyses.log
+Blocked IJK bias performance analyses.out
+Blocked IJK bias performance analyses.pdf
+Blocked IJK bias performance analyses.synctex.gz
+Blocked IJK bias performance analyses.tex
+Blocked IJK bias performance analyses.toc
+Blocked IJK bias performance analyses_files
+
+# Data
+blocked_ijk.csv
+blocked_kij.csv
+ijk.csv
+
 # Cmake
 /.build/
 /cmake-build-debug/
